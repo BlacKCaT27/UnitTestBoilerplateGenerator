@@ -288,7 +288,14 @@ namespace UnitTestBoilerplate
 			string unitTestNamespace;
 			string defaultNamespace = this.SelectedProject.Project.Properties.Item("DefaultNamespace").Value as string;
 
-			if (string.IsNullOrEmpty(this.relativePath))
+            string projectName = this.SelectedProject.Project.Name;
+
+            if (string.IsNullOrEmpty(defaultNamespace) || defaultNamespace[0] == '.')
+            {
+                defaultNamespace = projectName + defaultNamespace;
+            }
+
+            if (string.IsNullOrEmpty(this.relativePath))
 			{
 				unitTestNamespace = defaultNamespace;
 			}
